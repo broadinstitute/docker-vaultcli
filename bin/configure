@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+echo -e "Establishing environment for $APP_ENV from $VAULT_ADDR"
+
+export APP_ENV_MAP=${APP_ENV_FILE:-/tmp/app_env}
+
+# raise an error if no vault token
+if [ -z $VAULT_TOKEN ]; then
+    echo "No vault token set!"
+    exit 1
+fi
+
+source $APP_ENV_MAP
+
+echo -e "Finished establishing environment for $APP_ENV from $VAULT_ADDR"
+$@

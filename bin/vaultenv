@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import lib.vault_loader as vault_loader
+import sys, os
+
+vault = vault_loader.VaultLoader()
+key = sys.argv[1]
+
+if key:
+    try:
+        sys.stderr.write("Fetched {0} from {1}".format(key, vault.addr))
+        sys.stdout.write(vault.read(key))
+    except StandardError as e:
+        sys.stderr.write("Failed to fetch secret")
+        sys.stderr.write(e)
+
