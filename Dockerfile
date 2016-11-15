@@ -1,10 +1,9 @@
 FROM openjdk:8
 
 # install python
-RUN apt-get update \
-    && apt-get install -y python3.3
-
-RUN pip install virtualenv
+RUN apt-get update && \
+    apt-get install python3.4 python-pip python-virtualenv -y
+RUN pip install hvac
 
 # install vault
 RUN curl -sf -o vault.zip  https://releases.hashicorp.com/vault/0.6.1/vault_0.6.1_linux_amd64.zip && \
@@ -12,7 +11,6 @@ RUN curl -sf -o vault.zip  https://releases.hashicorp.com/vault/0.6.1/vault_0.6.
     rm -f vault.zip && \
     chmod 0755 /usr/local/bin/* && \
     rm -rf /tmp/* /var/tmp/*
-
 
 COPY lib/vault_loader.py /lib/vault_loader.py
 COPY bin/vaultenv /bin/vaultenv

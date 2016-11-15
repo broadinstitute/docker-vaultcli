@@ -20,7 +20,7 @@ class VaultLoader:
     def read(self, key):
         secret = self.client.read(key)
         if secret:
-            return secret
+            return secret['data']
         else:
             raise StandardError("Invalid path to secret!")
 
