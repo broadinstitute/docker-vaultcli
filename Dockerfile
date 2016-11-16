@@ -2,7 +2,8 @@ FROM openjdk:8
 
 # install python
 RUN apt-get update && \
-    apt-get install python3.4 python-pip python-virtualenv -y
+    apt-get install python3.4 python-pip python-virtualenv -y && \
+    apt-get install -y maven
 RUN pip install hvac
 
 # install vault
