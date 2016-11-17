@@ -22,12 +22,13 @@ inner_key = sys.argv[2]
 
 if key:
     try:
-        sys.stderr.write("Fetched {0} from {1}".format(key, vault.addr))
+        sys.stderr.write("Fetching {0} from {1}...\n".format(key, vault.addr))
         secret_map = vault.read(key)
         if inner_key and type(secret_map) is dict:
             secret = secret_map[inner_key]
         else:
             secret = json.dumps(secret_map)
         sys.stdout.write(secret)
+        sys.stderr.write("Success!")
     except StandardError as e:
-        sys.stderr.write("Failed to fetch secret: {}".format(str(e)))
+        sys.stderr.write("Failed to fetch secret: {}\n".format(str(e)))
