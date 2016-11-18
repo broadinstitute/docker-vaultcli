@@ -18,6 +18,9 @@ COPY bin/vaultenv /bin/vaultenv
 COPY bin/configure /bin/configure
 COPY bin/configure_remote /bin/configure_remote
 
+RUN mkdir secret_share
+VOLUME /secret_share
+
 RUN chmod +x /bin/vaultenv
 RUN chmod +x /bin/configure
 

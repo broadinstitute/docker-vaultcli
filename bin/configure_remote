@@ -13,10 +13,9 @@ fi
 # for all env files in tmp, load from vault
 for f in tmp/*
 do
-    echo "Configuring environment for $f from $VAULT_ADDR\n"
-    source $f > tmp/temp
-    cp -f tmp/temp $f
+    echo "Configuring environment for $f from $VAULT_ADDR"
+    name=$(echo $f | cut -d'/' -f2)
+    source $f > secret_share/$name
 done
 
-rm -rf tmp/temp
 $@
