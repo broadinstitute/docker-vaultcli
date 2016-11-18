@@ -29,6 +29,6 @@ if key:
         else:
             secret = json.dumps(secret_map)
         sys.stdout.write(secret)
-        sys.stderr.write("Success!")
+        sys.stderr.write("Success!\n")
     except StandardError as e:
         sys.stderr.write("Failed to fetch secret: {}\n".format(str(e)))

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# For configuring an environment when docker-vaultcli is set up as its own container
+# Env files should be loaded into /tmp, where they will be rendered and saved
+
+set -e 
+
+if [ -z $VAULT_TOKEN ]; then
+	echo "No vault token set!"
+	exit 1 
+fi
+
+# for all env files in tmp, load from vault
+for f in tmp/*
+do
+    echo "Configuring environment for $f from $VAULT_ADDR\n"
+    source $f > tmp/temp
+    cp -f tmp/temp $f
+done
+
+rm -rf tmp/temp
+$@

@@ -16,6 +16,7 @@ RUN curl -sf -o vault.zip  https://releases.hashicorp.com/vault/0.6.1/vault_0.6.
 COPY lib/vault_loader.py /lib/vault_loader.py
 COPY bin/vaultenv /bin/vaultenv
 COPY bin/configure /bin/configure
+COPY bin/configure_remote /bin/configure_remote
 
 RUN chmod +x /bin/vaultenv
 RUN chmod +x /bin/configure
