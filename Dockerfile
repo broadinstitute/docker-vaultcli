@@ -23,6 +23,7 @@ COPY lib/vault_loader.py /lib/vault_loader.py
 COPY bin/vaultenv /bin/vaultenv
 COPY bin/configure /bin/configure
 COPY bin/configure_remote /bin/configure_remote
+COPY bin/render_ctmpl /bin/render_ctmpl
 
 RUN mkdir secret_share
 VOLUME /secret_share
