@@ -13,6 +13,12 @@ RUN curl -sf -o vault.zip  https://releases.hashicorp.com/vault/0.6.1/vault_0.6.
     chmod 0755 /usr/local/bin/* && \
     rm -rf /tmp/* /var/tmp/*
 
+RUN curl -sf -o consul.zip https://releases.hashicorp.com/consul-template/0.16.0/consul-template_0.16.0_linux_amd64.zip && \
+    unzip consul.zip -d /usr/local/bin/ && \
+    rm -f consul.zip && \
+    chmod 0755 /usr/local/bin/* && \
+    rm -rf /tmp/*  /var/tmp/*
+
 COPY lib/vault_loader.py /lib/vault_loader.py
 COPY bin/vaultenv /bin/vaultenv
 COPY bin/configure /bin/configure
