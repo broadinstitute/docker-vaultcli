@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
 
 # provide file to decode as command line argument
-CTMPL_FILE=$1
-DEST_DIR=$2
+CTMPL_FILE=${CTMPL_FILE-"/tmp/properties.ctmpl"}
 
 # working directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # config values
 CONSUL_TEMPLATE_PATH=${CONSUL_TEMPLATE-"/usr/local/bin"}
-CONSUL_CONFIG=${CONSUL_CONFIG-"/etc/consul-template/config/config.json"}
 
 cd ${DIR}
 
-outputfile="${DEST_DIR}/${ENVIRONMENT}.properties"
+outputfile="${SOURCE_DIR}/${ENVIRONMENT}.properties"
 extension="${CTMPL_FILE##*.}"
 
 
@@ -33,10 +31,9 @@ else
     echo "Rendering ${CTMPL_FILE} to ${outputfile}"
     ${CONSUL_TEMPLATE_PATH}/consul-template \
         -once \
-        -config=${CONSUL_CONFIG} \
         -log-level=err \
         -template=$CTMPL_FILE:$outputfile
     errorout $? "FATAL ERROR: Unable to execute consule-template for ${CTMPL_FILE}!"
 fi
 
-exit 0
+$@
